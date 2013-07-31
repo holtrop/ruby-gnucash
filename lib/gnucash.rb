@@ -1,8 +1,8 @@
-require "gnucash/ledger"
+require "gnucash/book"
 require "gnucash/version"
 
 module Gnucash
   def self.open(fname)
-    Ledger.new(fname)
+    Book.new(fname)
   end
 end
