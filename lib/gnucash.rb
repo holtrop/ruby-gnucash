@@ -1,3 +1,4 @@
+require "gnucash/account"
 require "gnucash/book"
 require "gnucash/version"
 
