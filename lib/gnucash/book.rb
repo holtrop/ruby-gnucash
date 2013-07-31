@@ -15,6 +15,10 @@ module Gnucash
       build_accounts
     end
 
+    def find_account_by_id(id)
+      @accounts.find { |a| a.id == id }
+    end
+
     private
 
     def build_accounts
