@@ -4,6 +4,7 @@ require "nokogiri"
 module Gnucash
   class Book
     attr_accessor :accounts
+    attr_accessor :transactions
 
     def initialize(fname)
       @ng = Nokogiri.XML(Zlib::GzipReader.open(fname).read)
@@ -13,6 +14,7 @@ module Gnucash
       end
       @book_node = book_nodes.first
       build_accounts
+      build_transactions
     end
 
     def find_account_by_id(id)
@@ -24,6 +26,12 @@ module Gnucash
     def build_accounts
       @accounts = @book_node.xpath('gnc:account').map do |act_node|
         Account.new(self, act_node)
+      end
+    end
+
+    def build_transactions
+      @transactions = @book_node.xpath('gnc:transaction').map do |txn_node|
+        Transaction.new(self, txn_node)
       end
     end
   end

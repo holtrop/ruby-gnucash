@@ -1,5 +1,6 @@
 require "gnucash/account"
 require "gnucash/book"
+require "gnucash/transaction"
 require "gnucash/version"
 
 module Gnucash

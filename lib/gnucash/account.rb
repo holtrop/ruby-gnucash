@@ -3,6 +3,7 @@ module Gnucash
     attr_accessor :name
     attr_accessor :type
     attr_accessor :id
+    attr_accessor :transactions
 
     def initialize(book, node)
       @book = book
@@ -12,6 +13,7 @@ module Gnucash
       @id = node.xpath('act:id').text
       @parent_id = node.xpath('act:parent').text
       @parent_id = nil if @parent_id == ""
+      @transactions = []
     end
 
     def full_name
@@ -23,6 +25,13 @@ module Gnucash
         end
       end
       prefix + name
+    end
+
+    def add_transaction(txn, value)
+      @transactions << {
+        txn: txn,
+        value: value,
+      }
     end
   end
 end
