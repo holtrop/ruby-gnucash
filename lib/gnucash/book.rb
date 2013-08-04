@@ -15,6 +15,7 @@ module Gnucash
       @book_node = book_nodes.first
       build_accounts
       build_transactions
+      finalize
     end
 
     def find_account_by_id(id)
@@ -32,6 +33,12 @@ module Gnucash
     def build_transactions
       @transactions = @book_node.xpath('gnc:transaction').map do |txn_node|
         Transaction.new(self, txn_node)
+      end
+    end
+
+    def finalize
+      @accounts.each do |account|
+        account.finalize
       end
     end
   end

@@ -1,5 +1,6 @@
 module Gnucash
   class Transaction
+    attr_accessor :date
     attr_accessor :value
     attr_accessor :id
 

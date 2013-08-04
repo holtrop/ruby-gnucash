@@ -33,5 +33,11 @@ module Gnucash
         value: value,
       }
     end
+
+    def finalize
+      @transactions.sort! do |a, b|
+        a[:txn].date <=> b[:txn].date
+      end
+    end
   end
 end
