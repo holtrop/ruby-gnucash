@@ -38,6 +38,15 @@ module Gnucash
       @transactions.sort! do |a, b|
         a[:txn].date <=> b[:txn].date
       end
+      balance = Value.new(0)
+      @balances = @transactions.map do |txn_hash|
+        balance += txn_hash[:value]
+        [txn_hash[:txn].date, balance]
+      end
+    end
+
+    def current_balance
+      @balances.last[1] rescue Value.new(0)
     end
   end
 end
