@@ -1,6 +1,6 @@
 # Gnucash
 
-TODO: Write a gem description
+Ruby library for extracting data from GnuCash data files
 
 ## Installation
 
@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    book = Gnucash.open("MyBook.gnucash")
 
 ## Contributing
 
