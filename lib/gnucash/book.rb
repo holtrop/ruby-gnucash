@@ -5,6 +5,8 @@ module Gnucash
   class Book
     attr_accessor :accounts
     attr_accessor :transactions
+    attr_accessor :start_date
+    attr_accessor :end_date
 
     def initialize(fname)
       @ng = Nokogiri.XML(Zlib::GzipReader.open(fname).read)
@@ -31,8 +33,13 @@ module Gnucash
     end
 
     def build_transactions
+      @start_date = nil
+      @end_date = nil
       @transactions = @book_node.xpath('gnc:transaction').map do |txn_node|
-        Transaction.new(self, txn_node)
+        Transaction.new(self, txn_node).tap do |txn|
+          @start_date = txn.date if @start_date.nil? or txn.date < @start_date
+          @end_date = txn.date if @end_date.nil? or txn.date > @end_date
+        end
       end
     end
 
