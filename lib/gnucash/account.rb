@@ -14,6 +14,7 @@ module Gnucash
       @parent_id = node.xpath('act:parent').text
       @parent_id = nil if @parent_id == ""
       @transactions = []
+      @balances = []
     end
 
     def full_name
@@ -41,12 +42,34 @@ module Gnucash
       balance = Value.new(0)
       @balances = @transactions.map do |txn_hash|
         balance += txn_hash[:value]
-        [txn_hash[:txn].date, balance]
+        {
+          date: txn_hash[:txn].date,
+          value: balance,
+        }
       end
     end
 
     def current_balance
-      @balances.last[1] rescue Value.new(0)
+      return Value.new(0) unless @balances.size > 0
+      @balances.last[:value]
+    end
+
+    def balance_on(date)
+      return Value.new(0) unless @balances.size > 0
+      return Value.new(0) if @balances.first[:date] > date
+      return @balances.last[:value] if date >= @balances.last[:date]
+      imin = 0
+      imax = @balances.size - 2
+      idx = imax / 2
+      until @balances[idx][:date] <= date and @balances[idx + 1][:date] > date
+        if @balances[idx][:date] <= date
+          imin = idx + 1
+        else
+          imax = idx
+        end
+        idx = (imin + imax) / 2
+      end
+      @balances[idx][:value]
     end
   end
 end
