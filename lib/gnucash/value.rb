@@ -1,5 +1,7 @@
 module Gnucash
   class Value
+    include Comparable
+
     attr_accessor :val
 
     def initialize(val)
@@ -26,6 +28,10 @@ module Gnucash
 
     def to_s
       sprintf("%.02f", @val / 100.0)
+    end
+
+    def <=>(other)
+      @val <=> other.val
     end
   end
 end

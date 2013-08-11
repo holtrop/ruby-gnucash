@@ -34,5 +34,11 @@ module Gnucash
     it "formats the number with two decimal places" do
       Value.new("1400/100").to_s.should == "14.00"
     end
+
+    it "supports comparisons between two Value objects" do
+      Value.new("1234/100").should == Value.new(1234)
+      (Value.new("89/100") < Value.new("100/100")).should be_true
+      (Value.new("1234/100") > Value.new("222/100")).should be_true
+    end
   end
 end
