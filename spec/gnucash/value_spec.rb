@@ -30,5 +30,9 @@ module Gnucash
       c = a - b
       c.to_s.should == "-123.99"
     end
+
+    it "formats the number with two decimal places" do
+      Value.new("1400/100").to_s.should == "14.00"
+    end
   end
 end

@@ -25,7 +25,7 @@ module Gnucash
     end
 
     def to_s
-      (@val / 100.0).round(2).to_s
+      sprintf("%.02f", @val / 100.0)
     end
   end
 end
