@@ -9,7 +9,11 @@ module Gnucash
     attr_accessor :end_date
 
     def initialize(fname)
-      @ng = Nokogiri.XML(Zlib::GzipReader.open(fname).read)
+      begin
+        @ng = Nokogiri.XML(Zlib::GzipReader.open(fname).read)
+      rescue Zlib::GzipFile::Error
+        @ng = Nokogiri.XML(File.read(fname))
+      end
       book_nodes = @ng.xpath('/gnc-v2/gnc:book')
       if book_nodes.count != 1
         raise "Error: Expected to find one gnc:book entry"
