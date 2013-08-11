@@ -49,7 +49,7 @@ module Gnucash
       end
     end
 
-    def current_balance
+    def final_balance
       return Value.new(0) unless @balances.size > 0
       @balances.last[:value]
     end
