@@ -1,6 +1,7 @@
 module Gnucash
   class Value
     attr_accessor :val
+
     def initialize(val)
       if val.is_a?(String)
         if val =~ /^(-?\d+)\/100$/
