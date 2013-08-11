@@ -15,5 +15,5 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
-*.gnucash
 test.rb
+spec/books/*.gnucash.*.*
