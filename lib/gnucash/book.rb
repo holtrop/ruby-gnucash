@@ -28,6 +28,10 @@ module Gnucash
       @accounts.find { |a| a.id == id }
     end
 
+    def find_account_by_full_name(full_name)
+      @accounts.find { |a| a.full_name == full_name }
+    end
+
     private
 
     def build_accounts
