@@ -28,10 +28,11 @@ module Gnucash
       prefix + name
     end
 
-    def add_transaction(txn, value)
+    def add_transaction(txn, value, description)
       @transactions << {
         txn: txn,
         value: value,
+        description: description,
       }
     end
 
