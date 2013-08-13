@@ -4,7 +4,9 @@ require "rspec/core/rake_task"
 require "rdoc/task"
 require "yard"
 
-CLEAN.include "doc"
+CLEAN.include "rdoc"
+CLEAN.include "pkg"
+CLEAN.include "coverage"
 
 YARD::Rake::YardocTask.new do |yard|
   yard.files = ['lib/**/*.rb']
