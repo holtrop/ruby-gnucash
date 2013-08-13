@@ -1,5 +1,11 @@
 module Gnucash
   describe Value do
+    describe '.zero' do
+      it 'creates a Value object with value 0' do
+        Value.zero.val.should == 0
+      end
+    end
+
     it "raises an error when an unexpected string is given" do
       expect { Value.new("1234") }.to raise_error /Unexpected value string/
     end
