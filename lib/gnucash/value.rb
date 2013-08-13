@@ -4,6 +4,10 @@ module Gnucash
 
     attr_accessor :val
 
+    def self.zero
+      Value.new(0)
+    end
+
     def initialize(val, div = 100)
       if val.is_a?(String)
         if val =~ /^(-?\d+)\/(\d+)$/
