@@ -4,15 +4,17 @@ module Gnucash
 
     attr_accessor :val
 
-    def initialize(val)
+    def initialize(val, div = 100)
       if val.is_a?(String)
-        if val =~ /^(-?\d+)\/100$/
+        if val =~ /^(-?\d+)\/(\d+)$/
           @val = $1.to_i
+          @div = $2.to_i
         else
           raise "Unexpected value string: #{val.inspect}"
         end
       elsif val.is_a?(Fixnum)
         @val = val
+        @div = div
       else
         raise "Unexpected value type: #{val.class}"
       end
@@ -27,7 +29,11 @@ module Gnucash
     end
 
     def to_s
-      sprintf("%.02f", @val / 100.0)
+      sprintf("%.02f", to_f)
+    end
+
+    def to_f
+      @val / @div.to_f
     end
 
     def <=>(other)
