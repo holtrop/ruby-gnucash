@@ -2,12 +2,24 @@ require "zlib"
 require "nokogiri"
 
 module Gnucash
+  # Represent a GnuCash Book
   class Book
+    # _Array_ of _Gnucash::Account_ objects in the book
     attr_accessor :accounts
+
+    # _Array_ of _Gnucash::Transaction_ objects in the book
     attr_accessor :transactions
+
+    # _String_ in "YYYY-MM-DD" format of the first transaction in the book
     attr_accessor :start_date
+
+    # _String_ in "YYYY-MM-DD" format of the last transaction in the book
     attr_accessor :end_date
 
+    # Construct a Book object.
+    # Normally called internally by Gnucash.open()
+    # === Arguments
+    # +fname+ _String_:: The file name of the GnuCash file to open.
     def initialize(fname)
       begin
         @ng = Nokogiri.XML(Zlib::GzipReader.open(fname).read)
@@ -24,10 +36,22 @@ module Gnucash
       finalize
     end
 
+    # Return a handle to the Account object that has the given GUID.
+    # === Arguments
+    # +id+ _String_:: GUID
+    # === Return
+    # _Gnucash::Account_ or +nil+
     def find_account_by_id(id)
       @accounts.find { |a| a.id == id }
     end
 
+    # Return a handle to the Account object that has the given fully-qualified
+    # name.
+    # === Arguments
+    # +full_name+ _String_::
+    #   Fully-qualified account name (ex: "Expenses::Auto::Gas")
+    # === Return
+    # _Gnucash::Account_ or +nil+
     def find_account_by_full_name(full_name)
       @accounts.find { |a| a.full_name == full_name }
     end

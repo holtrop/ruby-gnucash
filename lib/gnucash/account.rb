@@ -1,10 +1,23 @@
 module Gnucash
+  # Represent a GnuCash account object
   class Account
+    # _String_: The name of the account (unqualified)
     attr_accessor :name
+
+    # _String_: The account type (such as "EXPENSE")
     attr_accessor :type
+
+    # _String_: The GUID of the account
     attr_accessor :id
+
+    # _Array_: List of _AccountTransaction_ transactions associated with this
+    # account.
     attr_accessor :transactions
 
+    # Create an Account object.
+    # === Arguments
+    # +book+ _Book_:: The Gnucash::Book containing the account
+    # +node+ _Nokogiri::XML::Node_:: Nokogiri XML node
     def initialize(book, node)
       @book = book
       @node = node
@@ -17,6 +30,7 @@ module Gnucash
       @balances = []
     end
 
+    # Return the fully qualified account name
     def full_name
       prefix = ""
       if @parent_id
@@ -28,10 +42,13 @@ module Gnucash
       prefix + name
     end
 
+    # Internal method used to associate a transaction with the account
     def add_transaction(act_txn)
       @transactions << act_txn
     end
 
+    # Internal method used to complete initialization of the Account after
+    # all transactions have been associated with it.
     def finalize
       @transactions.sort! { |a, b| a.date <=> b.date }
       balance = Value.new(0)
@@ -44,11 +61,15 @@ module Gnucash
       end
     end
 
+    # Return the final balance of the account as a _Gnucash::Value_
     def final_balance
       return Value.new(0) unless @balances.size > 0
       @balances.last[:value]
     end
 
+    # Return the balance of the account as of the date given as a
+    # _Gnucash::Value_. Transactions that occur on the given date are included
+    # in the returned balance.
     def balance_on(date)
       return Value.new(0) unless @balances.size > 0
       return Value.new(0) if @balances.first[:date] > date
