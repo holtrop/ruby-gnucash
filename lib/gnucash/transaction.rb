@@ -18,7 +18,7 @@ module Gnucash
         unless account
           raise "Could not find account with ID #{account_id} for transaction #{@id}"
         end
-        account.add_transaction(self, value, description)
+        account.add_transaction(AccountTransaction.new(self, value))
         {
           account_id: account_id,
           value: value,

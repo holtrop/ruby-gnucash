@@ -1,4 +1,5 @@
 require "gnucash/account"
+require "gnucash/account_transaction"
 require "gnucash/book"
 require "gnucash/transaction"
 require "gnucash/value"

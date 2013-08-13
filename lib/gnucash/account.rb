@@ -28,23 +28,17 @@ module Gnucash
       prefix + name
     end
 
-    def add_transaction(txn, value, description)
-      @transactions << {
-        txn: txn,
-        value: value,
-        description: description,
-      }
+    def add_transaction(act_txn)
+      @transactions << act_txn
     end
 
     def finalize
-      @transactions.sort! do |a, b|
-        a[:txn].date <=> b[:txn].date
-      end
+      @transactions.sort! { |a, b| a.date <=> b.date }
       balance = Value.new(0)
-      @balances = @transactions.map do |txn_hash|
-        balance += txn_hash[:value]
+      @balances = @transactions.map do |act_txn|
+        balance += act_txn.value
         {
-          date: txn_hash[:txn].date,
+          date: act_txn.date,
           value: balance,
         }
       end
