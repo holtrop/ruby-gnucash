@@ -10,7 +10,8 @@ Gem::Specification.new do |gem|
   gem.email         = ["jholtrop@gmail.com"]
   gem.description   = %q{Ruby library for extracting data from GnuCash data files}
   gem.summary       = %q{Extract data from GnuCash data files}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/holtrop/ruby-gnucash"
+  gem.license       = "MIT"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
