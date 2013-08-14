@@ -35,14 +35,48 @@ module Gnucash
       end
     end
 
-    # Add two Value objects
+    # Add to a Value object
+    # +other+ can be another Value or a Numeric
     def +(other)
-      Value.new(@val + other.val)
+      if other.is_a?(Value)
+        Value.new(@val + other.val)
+      elsif other.is_a?(Numeric)
+        (to_f + other).round(2)
+      else
+        raise "Unexpected argument"
+      end
     end
 
-    # Subtract two Value objects
+    # Subtract from a Value object
+    # +other+ can be another Value or a Numeric
     def -(other)
-      Value.new(@val - other.val)
+      if other.is_a?(Value)
+        Value.new(@val - other.val)
+      elsif other.is_a?(Numeric)
+        (to_f - other).round(2)
+      else
+        raise "Unexpected argument"
+      end
+    end
+
+    # Multiply a Value object
+    # +other+ should be a Numeric
+    def *(other)
+      if other.is_a?(Numeric)
+        (to_f * other).round(2)
+      else
+        raise "Unexpected argument"
+      end
+    end
+
+    # Divide a Value object
+    # +other+ should be a Numeric
+    def /(other)
+      if other.is_a?(Numeric)
+        (to_f / other).round(2)
+      else
+        raise "Unexpected argument"
+      end
     end
 
     # Represent the Value as a string (two decimal places)
