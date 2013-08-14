@@ -18,7 +18,24 @@ Or install it yourself as:
 
 ## Usage
 
+    require "gnucash"
+
     book = Gnucash.open("MyBook.gnucash")
+
+    book.accounts.each do |account|
+      puts "#{account.full_name}: #{account.final_balance}"
+    end
+
+    act = book.find_account_by_full_name("Assets::Checking")
+    balance = Gnucash::Value.zero
+    act.transactions.each do |txn|
+      balance += txn.value
+      $stdout.puts(sprintf("%s  %8s  %8s  %s",
+                           txn.date,
+                           txn.value,
+                           balance,
+                           txn.description))
+    end
 
 ## Contributing
 
