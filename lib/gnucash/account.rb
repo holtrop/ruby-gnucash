@@ -32,14 +32,7 @@ module Gnucash
 
     # Return the fully qualified account name
     def full_name
-      prefix = ""
-      if @parent_id
-        parent = @book.find_account_by_id(@parent_id)
-        if parent and parent.type != 'ROOT'
-          prefix = parent.full_name + "::"
-        end
-      end
-      prefix + name
+      @full_name ||= calculate_full_name
     end
 
     # Internal method used to associate a transaction with the account
@@ -86,6 +79,19 @@ module Gnucash
         idx = (imin + imax) / 2
       end
       @balances[idx][:value]
+    end
+
+    private
+
+    def calculate_full_name
+      prefix = ""
+      if @parent_id
+        parent = @book.find_account_by_id(@parent_id)
+        if parent and parent.type != 'ROOT'
+          prefix = parent.full_name + "::"
+        end
+      end
+      prefix + name
     end
   end
 end
