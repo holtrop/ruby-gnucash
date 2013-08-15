@@ -76,6 +76,9 @@ module Gnucash
     end
 
     def finalize
+      @accounts.sort! do |a, b|
+        a.full_name <=> b.full_name
+      end
       @accounts.each do |account|
         account.finalize
       end
