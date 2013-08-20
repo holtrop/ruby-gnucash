@@ -59,6 +59,11 @@ module Gnucash
       end
     end
 
+    # Negate a Value
+    def -@
+      Value.new(-@val, @div)
+    end
+
     # Multiply a Value object
     # +other+ should be a Numeric
     def *(other)

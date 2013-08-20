@@ -51,6 +51,12 @@ module Gnucash
       c.should == 1.1
     end
 
+    it "allows negating a Value object" do
+      a = Value.new("123/100")
+      b = -a
+      b.to_s.should == "-1.23"
+    end
+
     it "allows multiplying a Value by a Numeric" do
       a = Value.new("100/100")
       b = 12
