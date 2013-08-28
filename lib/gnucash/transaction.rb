@@ -13,6 +13,9 @@ module Gnucash
     # _String_: The description of the transaction
     attr_accessor :description
 
+    # _Array_ of _Hash_ with keys +account+ and +value+
+    attr_accessor :splits
+
     # Create a new Transaction object
     # === Arguments
     # +book+ _Book_:: The Gnucash::Book containing the transaction
@@ -32,7 +35,7 @@ module Gnucash
         end
         account.add_transaction(AccountTransaction.new(self, value))
         {
-          account_id: account_id,
+          account: account,
           value: value,
         }
       end
