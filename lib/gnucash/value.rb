@@ -5,7 +5,7 @@ module Gnucash
     include Comparable
 
     # _Fixnum_:: The raw, undivided integer value
-    attr_accessor :val
+    attr_reader :val
 
     # Create a new Value object with value 0
     def self.zero

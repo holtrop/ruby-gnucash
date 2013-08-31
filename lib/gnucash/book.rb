@@ -5,16 +5,16 @@ module Gnucash
   # Represent a GnuCash Book
   class Book
     # _Array_ of _Gnucash::Account_ objects in the book
-    attr_accessor :accounts
+    attr_reader :accounts
 
     # _Array_ of _Gnucash::Transaction_ objects in the book
-    attr_accessor :transactions
+    attr_reader :transactions
 
     # _String_ in "YYYY-MM-DD" format of the first transaction in the book
-    attr_accessor :start_date
+    attr_reader :start_date
 
     # _String_ in "YYYY-MM-DD" format of the last transaction in the book
-    attr_accessor :end_date
+    attr_reader :end_date
 
     # Construct a Book object.
     # Normally called internally by Gnucash.open()

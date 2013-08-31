@@ -5,16 +5,16 @@ module Gnucash
   # with an individual account.
   class Transaction
     # _String_: The date of the transaction, in ISO format ("YYYY-MM-DD")
-    attr_accessor :date
+    attr_reader :date
 
     # _String_: The GUID of the transaction
-    attr_accessor :id
+    attr_reader :id
 
     # _String_: The description of the transaction
-    attr_accessor :description
+    attr_reader :description
 
     # _Array_ of _Hash_ with keys +account+ and +value+
-    attr_accessor :splits
+    attr_reader :splits
 
     # Create a new Transaction object
     # === Arguments

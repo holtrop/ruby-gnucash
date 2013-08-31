@@ -2,20 +2,20 @@ module Gnucash
   # Represent a GnuCash account object
   class Account
     # _String_: The name of the account (unqualified)
-    attr_accessor :name
+    attr_reader :name
 
     # _String_: The account type (such as "EXPENSE")
-    attr_accessor :type
+    attr_reader :type
 
     # _String_: The GUID of the account
-    attr_accessor :id
+    attr_reader :id
 
     # _Array_: List of _AccountTransaction_ transactions associated with this
     # account.
-    attr_accessor :transactions
+    attr_reader :transactions
 
     # Boolean: whether the account is a placeholder or not
-    attr_accessor :placeholder
+    attr_reader :placeholder
 
     # Create an Account object.
     # === Arguments

@@ -2,7 +2,7 @@ module Gnucash
   # Class to link a transaction object to an Account.
   class AccountTransaction
     # _Gnucash::Value_: The transaction value for the linked account
-    attr_accessor :value
+    attr_reader :value
 
     # Construct an AccountTransaction object.
     # This method is used internally when building a Transaction object.
