@@ -3,7 +3,9 @@ module Gnucash
     before(:all) do
       # just read the file once
       @book = Gnucash.open("spec/books/sample.gnucash")
+      @assets = @book.find_account_by_full_name("Assets")
       @checking = @book.find_account_by_full_name("Assets::Current Assets::Checking Account")
+      @income = @book.find_account_by_full_name("Income")
       @salary = @book.find_account_by_full_name("Income::Salary")
     end
 
@@ -35,6 +37,13 @@ module Gnucash
       it "includes transactions that occur on the given date" do
         @checking.balance_on("2007-03-27").should == Value.new(780000)
       end
+    end
+
+    it "stores whether the account was a placeholder" do
+      @assets.placeholder.should be_true
+      @checking.placeholder.should be_false
+      @income.placeholder.should be_true
+      @salary.placeholder.should be_false
     end
   end
 end

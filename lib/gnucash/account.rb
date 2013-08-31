@@ -14,6 +14,9 @@ module Gnucash
     # account.
     attr_accessor :transactions
 
+    # Boolean: whether the account is a placeholder or not
+    attr_accessor :placeholder
+
     # Create an Account object.
     # === Arguments
     # +book+ _Book_:: The Gnucash::Book containing the account
@@ -28,6 +31,10 @@ module Gnucash
       @parent_id = nil if @parent_id == ""
       @transactions = []
       @balances = []
+      @placeholder = node.xpath("act:slots/slot").find do |slot|
+        (slot.xpath("slot:key").first.text == "placeholder" and
+         slot.xpath("slot:value").first.text == "true")
+      end
     end
 
     # Return the fully qualified account name
