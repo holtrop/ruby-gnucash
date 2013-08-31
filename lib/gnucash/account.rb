@@ -4,6 +4,9 @@ module Gnucash
     # _String_: The name of the account (unqualified)
     attr_reader :name
 
+    # _String_: The account description
+    attr_reader :description
+
     # _String_: The account type (such as "EXPENSE")
     attr_reader :type
 
@@ -26,6 +29,7 @@ module Gnucash
       @node = node
       @name = node.xpath('act:name').text
       @type = node.xpath('act:type').text
+      @description = node.xpath('act:description').text
       @id = node.xpath('act:id').text
       @parent_id = node.xpath('act:parent').text
       @parent_id = nil if @parent_id == ""

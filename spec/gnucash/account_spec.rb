@@ -13,6 +13,10 @@ module Gnucash
       @salary.name.should == "Salary"
     end
 
+    it "gives access to the account description" do
+      @checking.description.should == "Checking Account"
+    end
+
     it "gives access to the fully-qualified account name" do
       @checking.full_name.should == "Assets::Current Assets::Checking Account"
     end
