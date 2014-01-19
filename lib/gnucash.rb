@@ -1,9 +1,9 @@
-require "gnucash/account"
-require "gnucash/account_transaction"
-require "gnucash/book"
-require "gnucash/transaction"
-require "gnucash/value"
-require "gnucash/version"
+require_relative "gnucash/account"
+require_relative "gnucash/account_transaction"
+require_relative "gnucash/book"
+require_relative "gnucash/transaction"
+require_relative "gnucash/value"
+require_relative "gnucash/version"
 
 # Namespace module for gnucash gem functionality
 module Gnucash
