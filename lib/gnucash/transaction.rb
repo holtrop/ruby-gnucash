@@ -4,7 +4,7 @@ module Gnucash
   # Splits are created as AccountTransaction objects which are associated
   # with an individual account.
   class Transaction
-    # _String_: The date of the transaction, in ISO format ("YYYY-MM-DD")
+    # _Date_: The date of the transaction
     attr_reader :date
 
     # _String_: The GUID of the transaction
@@ -24,7 +24,7 @@ module Gnucash
       @book = book
       @node = node
       @id = node.xpath('trn:id').text
-      @date = node.xpath('trn:date-posted/ts:date').text.split(' ').first
+      @date = Date.parse(node.xpath('trn:date-posted/ts:date').text.split(' ').first)
       @description = node.xpath('trn:description').text
       @splits = node.xpath('trn:splits/trn:split').map do |split_node|
         value = Value.new(split_node.xpath('split:value').text)
