@@ -2,6 +2,8 @@
 
 Ruby library for extracting data from GnuCash data files
 
+[![Gem Version](https://badge.fury.io/rb/gnucash.png)](http://badge.fury.io/rb/gnucash)
+
 ## Installation
 
 Add this line to your application's Gemfile:
