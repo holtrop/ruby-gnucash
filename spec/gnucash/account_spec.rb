@@ -4,9 +4,9 @@ module Gnucash
       # just read the file once
       @book = Gnucash.open("spec/books/sample.gnucash")
       @assets = @book.find_account_by_full_name("Assets")
-      @checking = @book.find_account_by_full_name("Assets::Current Assets::Checking Account")
+      @checking = @book.find_account_by_full_name("Assets:Current Assets:Checking Account")
       @income = @book.find_account_by_full_name("Income")
-      @salary = @book.find_account_by_full_name("Income::Salary")
+      @salary = @book.find_account_by_full_name("Income:Salary")
     end
 
     it "gives access to the account name" do
@@ -18,7 +18,7 @@ module Gnucash
     end
 
     it "gives access to the fully-qualified account name" do
-      @checking.full_name.should == "Assets::Current Assets::Checking Account"
+      @checking.full_name.should == "Assets:Current Assets:Checking Account"
     end
 
     it "gives access to the final balance" do
