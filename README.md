@@ -26,7 +26,7 @@ Or install it yourself as:
       puts "#{account.full_name}: #{account.final_balance}"
     end
 
-    act = book.find_account_by_full_name("Assets::Checking")
+    act = book.find_account_by_full_name("Assets:Checking")
     balance = Gnucash::Value.zero
     act.transactions.each do |txn|
       balance += txn.value
