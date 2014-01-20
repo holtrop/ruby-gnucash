@@ -39,6 +39,20 @@ Or install it yourself as:
                            txn.description))
     end
 
+## Release Notes
+
+### v1.2.0
+
+- use Date objects instead of formatted strings for dates
+- use a single colon instead of a double colon in account names
+- use 'require_relative' instead of 'require'
+
+### v1.1.0
+
+- store and provide access to the account description
+- change many attributes to read-only
+- add 'placeholder' Account attribute
+
 ## Contributing
 
 1. Fork it
