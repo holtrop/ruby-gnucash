@@ -74,7 +74,9 @@ module Gnucash
     # Return the balance of the account as of the date given as a
     # _Gnucash::Value_. Transactions that occur on the given date are included
     # in the returned balance.
+    # date can be a _String_ ("YYYY-MM-DD") or _Date_ object.
     def balance_on(date)
+      date = Date.parse(date) if date.is_a?(String)
       return Value.new(0) unless @balances.size > 0
       return Value.new(0) if @balances.first[:date] > date
       return @balances.last[:value] if date >= @balances.last[:date]

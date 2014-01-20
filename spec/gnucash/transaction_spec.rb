@@ -8,10 +8,12 @@ module Gnucash
         split_node = "split_node"
         value_text = "value_text"
         account_text = "account_text"
+        date_text = "date_text"
 
-        node.should_receive(:xpath).with('trn:id').and_return(text)
         text.stub(:text) {"hi there"}
-        node.should_receive(:xpath).with('trn:date-posted/ts:date').and_return(text)
+        node.should_receive(:xpath).with('trn:id').and_return(text)
+        date_text.should_receive(:text).and_return("2014-01-20")
+        node.should_receive(:xpath).with('trn:date-posted/ts:date').and_return(date_text)
         value_text.should_receive(:text).and_return("1177/100")
         account_text.should_receive(:text).and_return("a1s2d3f4")
         split_node.should_receive(:xpath).with("split:value").and_return(value_text)

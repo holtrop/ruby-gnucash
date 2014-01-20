@@ -20,11 +20,11 @@ module Gnucash
       end
 
       it "records the date of the earliest transaction" do
-        @subject.start_date.should == "2007-01-01"
+        @subject.start_date.should == Date.parse("2007-01-01")
       end
 
       it "records the date of the last transaction" do
-        @subject.end_date.should == "2012-12-28"
+        @subject.end_date.should == Date.parse("2012-12-28")
       end
 
       it "lets you find an account by id" do

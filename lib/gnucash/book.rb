@@ -10,10 +10,10 @@ module Gnucash
     # _Array_ of _Gnucash::Transaction_ objects in the book
     attr_reader :transactions
 
-    # _String_ in "YYYY-MM-DD" format of the first transaction in the book
+    # _Date_ of the first transaction in the book
     attr_reader :start_date
 
-    # _String_ in "YYYY-MM-DD" format of the last transaction in the book
+    # _Date_ of the last transaction in the book
     attr_reader :end_date
 
     # Construct a Book object.
