@@ -99,7 +99,7 @@ module Gnucash
       if @parent_id
         parent = @book.find_account_by_id(@parent_id)
         if parent and parent.type != 'ROOT'
-          prefix = parent.full_name + "::"
+          prefix = parent.full_name + ":"
         end
       end
       prefix + name

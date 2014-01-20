@@ -32,7 +32,7 @@ module Gnucash
       end
 
       it "lets you find an account by full name" do
-        @subject.find_account_by_full_name("Assets::Current Assets::Savings Account").id.should == "67e6e7daadc35716eb6152769373e974"
+        @subject.find_account_by_full_name("Assets:Current Assets:Savings Account").id.should == "67e6e7daadc35716eb6152769373e974"
       end
     end
   end

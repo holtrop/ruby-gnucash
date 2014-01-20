@@ -27,7 +27,7 @@ module Gnucash
     context "without errors" do
       before(:all) do
         @book = Gnucash.open("spec/books/sample.gnucash")
-        @txn = @book.find_account_by_full_name("Assets::Current Assets::Cash in Wallet").transactions.first
+        @txn = @book.find_account_by_full_name("Assets:Current Assets:Cash in Wallet").transactions.first
       end
 
       it "keeps track of the transaction description" do
