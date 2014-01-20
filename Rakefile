@@ -1,3 +1,9 @@
+require "bundler"
+begin
+    Bundler.setup(:default, :development)
+rescue Bundler::BundlerError => e
+    raise LoadError.new("Unable to Bundler.setup(): You probably need to run `bundle install`: #{e.message}")
+end
 require "bundler/gem_tasks"
 require "rake/clean"
 require "rspec/core/rake_task"
