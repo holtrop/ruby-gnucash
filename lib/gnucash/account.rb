@@ -1,29 +1,29 @@
 module Gnucash
-  # Represent a GnuCash account object
+  # Represent a GnuCash account object.
   class Account
-    # _String_: The name of the account (unqualified)
+    # @return [String] The name of the account (unqualified).
     attr_reader :name
 
-    # _String_: The account description
+    # @return [String] The account description.
     attr_reader :description
 
-    # _String_: The account type (such as "EXPENSE")
+    # @return [String] The account type (such as "EXPENSE").
     attr_reader :type
 
-    # _String_: The GUID of the account
+    # @return [String] The GUID of the account.
     attr_reader :id
 
-    # _Array_: List of _AccountTransaction_ transactions associated with this
-    # account.
+    # @return [Array<AccountTransaction>] List of transactions associated with
+    # this account.
     attr_reader :transactions
 
-    # Boolean: whether the account is a placeholder or not
+    # @return [Boolean] Whether the account is a placeholder or not.
     attr_reader :placeholder
 
     # Create an Account object.
-    # === Arguments
-    # +book+ _Book_:: The Gnucash::Book containing the account
-    # +node+ _Nokogiri::XML::Node_:: Nokogiri XML node
+    #
+    # @param book [Book] The {Gnucash::Book} containing the account.
+    # @param node [Nokogiri::XML::Node] Nokogiri XML node.
     def initialize(book, node)
       @book = book
       @node = node
@@ -41,18 +41,24 @@ module Gnucash
       end
     end
 
-    # Return the fully qualified account name
+    # Return the fully qualified account name.
+    #
+    # @return [String] Fully qualified account name.
     def full_name
       @full_name ||= calculate_full_name
     end
 
-    # Internal method used to associate a transaction with the account
+    # Internal method used to associate a transaction with the account.
+    #
+    # @return [void]
     def add_transaction(act_txn)
       @transactions << act_txn
     end
 
     # Internal method used to complete initialization of the Account after
     # all transactions have been associated with it.
+    #
+    # @return [void]
     def finalize
       @transactions.sort! { |a, b| a.date <=> b.date }
       balance = Value.new(0)
@@ -65,16 +71,21 @@ module Gnucash
       end
     end
 
-    # Return the final balance of the account as a _Gnucash::Value_
+    # Return the final balance of the account as a {Value}.
+    #
+    # @return [Value] The final balance of the account.
     def final_balance
       return Value.new(0) unless @balances.size > 0
       @balances.last[:value]
     end
 
-    # Return the balance of the account as of the date given as a
-    # _Gnucash::Value_. Transactions that occur on the given date are included
-    # in the returned balance.
-    # date can be a _String_ ("YYYY-MM-DD") or _Date_ object.
+    # Return the balance of the account as of the date given as a {Value}.
+    # Transactions that occur on the given date are included in the returned
+    # balance.
+    #
+    # @param date [String, Date] Date on which to query the balance.
+    #
+    # @return [Value] Balance of the account as of the date given.
     def balance_on(date)
       date = Date.parse(date) if date.is_a?(String)
       return Value.new(0) unless @balances.size > 0
@@ -96,6 +107,7 @@ module Gnucash
 
     private
 
+    # @return [String] Fully qualified account name.
     def calculate_full_name
       prefix = ""
       if @parent_id

@@ -2,24 +2,25 @@ require "zlib"
 require "nokogiri"
 
 module Gnucash
-  # Represent a GnuCash Book
+  # Represent a GnuCash Book.
   class Book
-    # _Array_ of _Gnucash::Account_ objects in the book
+    # @return [Array<Account>] Accounts in the book.
     attr_reader :accounts
 
-    # _Array_ of _Gnucash::Transaction_ objects in the book
+    # @return [Array<Transaction>] Transactions in the book.
     attr_reader :transactions
 
-    # _Date_ of the first transaction in the book
+    # @return [Date] Date of the first transaction in the book.
     attr_reader :start_date
 
-    # _Date_ of the last transaction in the book
+    # @return [Date] Date of the last transaction in the book.
     attr_reader :end_date
 
     # Construct a Book object.
-    # Normally called internally by Gnucash.open()
-    # === Arguments
-    # +fname+ _String_:: The file name of the GnuCash file to open.
+    #
+    # Normally called internally by {Gnucash.open}.
+    #
+    # @param fname [String] The file name of the GnuCash file to open.
     def initialize(fname)
       begin
         @ng = Nokogiri.XML(Zlib::GzipReader.open(fname).read)
@@ -37,33 +38,35 @@ module Gnucash
     end
 
     # Return a handle to the Account object that has the given GUID.
-    # === Arguments
-    # +id+ _String_:: GUID
-    # === Return
-    # _Gnucash::Account_ or +nil+
+    #
+    # @param id [String] GUID.
+    #
+    # @return [Account, nil] Account object, or nil if not found.
     def find_account_by_id(id)
       @accounts.find { |a| a.id == id }
     end
 
     # Return a handle to the Account object that has the given fully-qualified
     # name.
-    # === Arguments
-    # +full_name+ _String_::
-    #   Fully-qualified account name (ex: "Expenses::Auto::Gas")
-    # === Return
-    # _Gnucash::Account_ or +nil+
+    #
+    # @param full_name [String]
+    #   Fully-qualified account name (ex: "Expenses::Auto::Gas").
+    #
+    # @return [Account, nil] Account object, or nil if not found.
     def find_account_by_full_name(full_name)
       @accounts.find { |a| a.full_name == full_name }
     end
 
     private
 
+    # @return [void]
     def build_accounts
       @accounts = @book_node.xpath('gnc:account').map do |act_node|
         Account.new(self, act_node)
       end
     end
 
+    # @return [void]
     def build_transactions
       @start_date = nil
       @end_date = nil
@@ -75,6 +78,7 @@ module Gnucash
       end
     end
 
+    # @return [void]
     def finalize
       @accounts.sort! do |a, b|
         a.full_name <=> b.full_name

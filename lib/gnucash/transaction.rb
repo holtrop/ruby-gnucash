@@ -2,26 +2,27 @@ require "date"
 
 module Gnucash
   # Represent a GnuCash transaction.
+  #
   # Transactions have multiple splits with individual values.
   # Splits are created as AccountTransaction objects which are associated
   # with an individual account.
   class Transaction
-    # _Date_: The date of the transaction
+    # @return [Date] The date of the transaction.
     attr_reader :date
 
-    # _String_: The GUID of the transaction
+    # @return [String] The GUID of the transaction.
     attr_reader :id
 
-    # _String_: The description of the transaction
+    # @return [String] The description of the transaction.
     attr_reader :description
 
-    # _Array_ of _Hash_ with keys +account+ and +value+
+    # @return [Array<Hash>] Hashes with keys +:account+ and +:value+.
     attr_reader :splits
 
-    # Create a new Transaction object
-    # === Arguments
-    # +book+ _Book_:: The Gnucash::Book containing the transaction
-    # +node+ _Nokogiri::XML::Node_:: Nokogiri XML node
+    # Create a new Transaction object.
+    #
+    # @param book [Book] The {Gnucash::Book} containing the transaction.
+    # @param node [Nokogiri::XML::Node] Nokogiri XML node.
     def initialize(book, node)
       @book = book
       @node = node

@@ -7,10 +7,9 @@ end
 require "bundler/gem_tasks"
 require "rake/clean"
 require "rspec/core/rake_task"
-require "rdoc/task"
 require "yard"
 
-CLEAN.include "rdoc"
+CLEAN.include "doc"
 CLEAN.include "pkg"
 CLEAN.include "coverage"
 
@@ -20,10 +19,6 @@ end
 
 RSpec::Core::RakeTask.new("spec")
 
-Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "Ruby library for extracting data from GnuCash data files"
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end
+YARD::Rake::YardocTask.new(:yard)
 
 task :default => :spec
