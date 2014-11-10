@@ -20,7 +20,9 @@ module Gnucash
     #
     # Normally called internally by {Gnucash.open}.
     #
-    # @param fname [String] The file name of the GnuCash file to open.
+    # @param fname [String]
+    #   The file name of the GnuCash file to open. Only XML format (or gzipped
+    #   XML format) GnuCash data files are recognized.
     def initialize(fname)
       begin
         @ng = Nokogiri.XML(Zlib::GzipReader.open(fname).read)

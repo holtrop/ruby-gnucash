@@ -1,6 +1,6 @@
 # Gnucash
 
-Ruby library for extracting data from GnuCash data files
+Ruby library for extracting data from XML GnuCash data files
 
 [![Gem Version](https://badge.fury.io/rb/gnucash.png)](http://badge.fury.io/rb/gnucash)
 

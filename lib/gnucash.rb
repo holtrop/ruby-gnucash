@@ -11,7 +11,12 @@ module Gnucash
   #
   # The file can be either a plain-text XML file or a gzipped XML file.
   #
-  # @param fname [String] Name of the file to open.
+  # @param fname [String]
+  #   The file name of the GnuCash file to open. Only XML format (or gzipped
+  #   XML format) GnuCash data files are recognized.
+  #
+  # @return [Book]
+  #   Gnucash::Book instance.
   def self.open(fname)
     Book.new(fname)
   end
