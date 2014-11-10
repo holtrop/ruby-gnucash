@@ -19,6 +19,4 @@ end
 
 RSpec::Core::RakeTask.new("spec")
 
-YARD::Rake::YardocTask.new(:yard)
-
 task :default => :spec
