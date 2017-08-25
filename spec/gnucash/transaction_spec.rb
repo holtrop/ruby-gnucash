@@ -16,7 +16,7 @@ module Gnucash
         expect(node).to receive(:xpath).with('trn:date-posted/ts:date').and_return(date_text)
         expect(value_text).to receive(:text).and_return("1177/100")
         expect(account_text).to receive(:text).and_return("a1s2d3f4")
-        expect(split_node).to receive(:xpath).with("split:value").and_return(value_text)
+        expect(split_node).to receive(:xpath).with("split:quantity").and_return(value_text)
         expect(split_node).to receive(:xpath).with("split:account").and_return(account_text)
         expect(node).to receive(:xpath).with('trn:description').and_return(text)
         expect(node).to receive(:xpath).with('trn:splits/trn:split').and_return([split_node])

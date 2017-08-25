@@ -30,7 +30,10 @@ module Gnucash
       @date = Date.parse(node.xpath('trn:date-posted/ts:date').text.split(' ').first)
       @description = node.xpath('trn:description').text
       @splits = node.xpath('trn:splits/trn:split').map do |split_node|
-        value = Value.new(split_node.xpath('split:value').text)
+        # Note: split:value represents the split value in the transaction's
+        # currency while split:quantity represents it in the currency
+        # associated with the account associated with this split.
+        value = Value.new(split_node.xpath('split:quantity').text)
         account_id = split_node.xpath('split:account').text
         account = @book.find_account_by_id(account_id)
         unless account
