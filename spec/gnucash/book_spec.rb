@@ -3,11 +3,11 @@ module Gnucash
     context "with errors" do
       it "raises an error for unexpected XML" do
         gr = "gr"
-        Zlib::GzipReader.should_receive(:open).and_return(gr)
-        gr.should_receive(:read).and_return(nil)
+        expect(Zlib::GzipReader).to receive(:open).and_return(gr)
+        expect(gr).to receive(:read).and_return(nil)
         ng = "ng"
-        Nokogiri.should_receive(:XML).and_return(ng)
-        ng.should_receive(:xpath).with('/gnc-v2/gnc:book').and_return([])
+        expect(Nokogiri).to receive(:XML).and_return(ng)
+        expect(ng).to receive(:xpath).with('/gnc-v2/gnc:book').and_return([])
 
         expect { Gnucash::Book.new('file name') }.to raise_error "Error: Expected to find one gnc:book entry"
       end
@@ -20,19 +20,19 @@ module Gnucash
       end
 
       it "records the date of the earliest transaction" do
-        @subject.start_date.should == Date.parse("2007-01-01")
+        expect(@subject.start_date).to eq Date.parse("2007-01-01")
       end
 
       it "records the date of the last transaction" do
-        @subject.end_date.should == Date.parse("2012-12-28")
+        expect(@subject.end_date).to eq Date.parse("2012-12-28")
       end
 
       it "lets you find an account by id" do
-        @subject.find_account_by_id("67e6e7daadc35716eb6152769373e974").name.should == "Savings Account"
+        expect(@subject.find_account_by_id("67e6e7daadc35716eb6152769373e974").name).to eq "Savings Account"
       end
 
       it "lets you find an account by full name" do
-        @subject.find_account_by_full_name("Assets:Current Assets:Savings Account").id.should == "67e6e7daadc35716eb6152769373e974"
+        expect(@subject.find_account_by_full_name("Assets:Current Assets:Savings Account").id).to eq "67e6e7daadc35716eb6152769373e974"
       end
     end
   end
