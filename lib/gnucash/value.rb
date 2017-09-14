@@ -4,8 +4,11 @@ module Gnucash
   class Value
     include Comparable
 
-    # @return [Fixnum] The raw, undivided integer value.
+    # @return [Integer] The raw, undivided integer value.
     attr_reader :val
+
+    # @return [Integer] Divisor value.
+    attr_reader :div
 
     # Create a new Value object with value 0.
     #
@@ -16,11 +19,11 @@ module Gnucash
 
     # Construct a Value object.
     #
-    # @param val [String, Fixnum]
+    # @param val [String, Integer]
     #   Either a String in the form "1234/100" or an integer containing the
     #   raw value.
-    # @param div [Fixnum]
-    #   The divisor value to use (when +val+ is given as a Fixnum).
+    # @param div [Integer]
+    #   The divisor value to use (when +val+ is given as a Integer).
     def initialize(val, div = 100)
       if val.is_a?(String)
         if val =~ /^(-?\d+)\/(\d+)$/
@@ -29,7 +32,7 @@ module Gnucash
         else
           raise "Unexpected value string: #{val.inspect}"
         end
-      elsif val.is_a?(Fixnum)
+      elsif val.is_a?(Integer)
         @val = val
         @div = div
       else
@@ -44,7 +47,8 @@ module Gnucash
     # @return [Value] Result of addition.
     def +(other)
       if other.is_a?(Value)
-        Value.new(@val + other.val)
+        lcm_div = @div.lcm(other.div)
+        Value.new((@val * (lcm_div / @div)) + (other.val * (lcm_div / other.div)), lcm_div)
       elsif other.is_a?(Numeric)
         (to_f + other).round(2)
       else
@@ -59,7 +63,8 @@ module Gnucash
     # @return [Value] Result of subtraction.
     def -(other)
       if other.is_a?(Value)
-        Value.new(@val - other.val)
+        lcm_div = @div.lcm(other.div)
+        Value.new((@val * (lcm_div / @div)) - (other.val * (lcm_div / other.div)), lcm_div)
       elsif other.is_a?(Numeric)
         (to_f - other).round(2)
       else
@@ -78,7 +83,7 @@ module Gnucash
     #
     # @param other [Numeric] Multiplier.
     #
-    # @return [Value] Result of multiplication.
+    # @return [Numeric] Result of multiplication.
     def *(other)
       if other.is_a?(Numeric)
         (to_f * other).round(2)
@@ -91,7 +96,7 @@ module Gnucash
     #
     # @param other [Numeric] Divisor.
     #
-    # @return [Value] Result of division.
+    # @return [Numeric] Result of division.
     def /(other)
       if other.is_a?(Numeric)
         (to_f / other).round(2)
@@ -118,7 +123,17 @@ module Gnucash
     #
     # @return [Integer] Comparison result.
     def <=>(other)
-      @val <=> other.val
+      lcm_div = @div.lcm(other.div)
+      (@val * (lcm_div / @div)) <=> (other.val * (lcm_div / other.div))
+    end
+
+    # Test two Value objects for equality.
+    #
+    # @return [Boolean]
+    #   Whether the two Value objects hold the same value.
+    def ==(other)
+      lcm_div = @div.lcm(other.div)
+      (@val * (lcm_div / @div)) == (other.val * (lcm_div / other.div))
     end
   end
 end

@@ -81,6 +81,12 @@ module Gnucash
       expect((Value.new("1234/100") > Value.new("222/100"))).to be_truthy
     end
 
+    it "converts between values with different divisors" do
+      expect(Value.new("1234/10000") < Value.new("100/100")).to be_truthy
+      expect(Value.new(7, 100) + Value.new(17, 1000)).to eq Value.new(87, 1000)
+      expect(Value.new(80, 100) - Value.new(5, 50)).to eq Value.new(70, 100)
+    end
+
     context "errors" do
       it "raises an error when attempting to add an unknown object type" do
         expect { Value.new(33) + nil }.to raise_error /Unexpected argument/i
