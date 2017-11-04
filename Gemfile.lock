@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gnucash (1.2.2)
+    gnucash (1.3.0)
       nokogiri
 
 GEM
