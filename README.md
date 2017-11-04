@@ -33,11 +33,11 @@ act = book.find_account_by_full_name("Assets:Checking")
 balance = Gnucash::Value.zero
 act.transactions.each do |txn|
   balance += txn.value
-  $stdout.puts(sprintf("%s  %8s  %8s  %s",
-                       txn.date,
-                       txn.value,
-                       balance,
-                       txn.description))
+  $stdout.printf("%s  %8s  %8s  %s\n",
+                 txn.date,
+                 txn.value,
+                 balance,
+                 txn.description))
 end
 
 year = Date.today.year
