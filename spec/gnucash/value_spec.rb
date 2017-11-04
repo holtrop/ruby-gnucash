@@ -64,11 +64,25 @@ module Gnucash
       expect(c).to eq 12.00
     end
 
+    it "allows multiplying a Value by a Value" do
+      a = Value.new("100/100")
+      b = Value.new(1200)
+      c = a * b
+      expect(c.round(2)).to eq 12.00
+    end
+
     it "allows dividing a Value by a Numeric" do
       a = Value.new("150000/100")
       b = 150
       c = a / b
       expect(c).to eq 10.0
+    end
+
+    it "allows dividing a Value by a Value" do
+      a = Value.new("150000/100")
+      b = Value.new(15000)
+      c = a / b
+      expect(c.round(2)).to eq 10.0
     end
 
     it "formats the number with two decimal places" do
