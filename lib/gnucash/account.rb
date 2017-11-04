@@ -13,8 +13,8 @@ module Gnucash
     # @return [String] The GUID of the account.
     attr_reader :id
 
-    # @return [Array<AccountTransaction>] List of transactions associated with
-    # this account.
+    # @return [Array<AccountTransaction>]
+    #   List of transactions associated with this account.
     attr_reader :transactions
 
     # @return [Boolean] Whether the account is a placeholder or not.
