@@ -81,27 +81,33 @@ module Gnucash
 
     # Multiply a Value object.
     #
-    # @param other [Numeric] Multiplier.
+    # @param other [Numeric, Value] Multiplier.
     #
     # @return [Numeric] Result of multiplication.
     def *(other)
+      if other.is_a?(Value)
+        other = other.to_f
+      end
       if other.is_a?(Numeric)
         (to_f * other).round(2)
       else
-        raise "Unexpected argument"
+        raise "Unexpected argument (#{other.inspect})"
       end
     end
 
     # Divide a Value object.
     #
-    # @param other [Numeric] Divisor.
+    # @param other [Numeric, Value] Divisor.
     #
     # @return [Numeric] Result of division.
     def /(other)
+      if other.is_a?(Value)
+        other = other.to_f
+      end
       if other.is_a?(Numeric)
         (to_f / other).round(2)
       else
-        raise "Unexpected argument"
+        raise "Unexpected argument (#{other.inspect})"
       end
     end
 
