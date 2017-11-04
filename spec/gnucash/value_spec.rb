@@ -34,7 +34,7 @@ module Gnucash
       a = Value.new("1234/100")
       b = 15
       c = a + b
-      expect(c).to eq 27.34
+      expect(c.round(2)).to eq 27.34
     end
 
     it "allows subtracting two value objects" do
@@ -48,7 +48,7 @@ module Gnucash
       a = Value.new("890/100")
       b = 7.8
       c = a - b
-      expect(c).to eq 1.1
+      expect(c.round(2)).to eq 1.1
     end
 
     it "allows negating a Value object" do
@@ -61,7 +61,7 @@ module Gnucash
       a = Value.new("100/100")
       b = 12
       c = a * b
-      expect(c).to eq 12.00
+      expect(c.round(2)).to eq 12.00
     end
 
     it "allows multiplying a Value by a Value" do
@@ -75,7 +75,7 @@ module Gnucash
       a = Value.new("150000/100")
       b = 150
       c = a / b
-      expect(c).to eq 10.0
+      expect(c.round(2)).to eq 10.0
     end
 
     it "allows dividing a Value by a Value" do

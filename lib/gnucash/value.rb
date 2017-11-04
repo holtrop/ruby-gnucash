@@ -50,7 +50,7 @@ module Gnucash
         lcm_div = @div.lcm(other.div)
         Value.new((@val * (lcm_div / @div)) + (other.val * (lcm_div / other.div)), lcm_div)
       elsif other.is_a?(Numeric)
-        (to_f + other).round(2)
+        to_f + other
       else
         raise "Unexpected argument"
       end
@@ -66,7 +66,7 @@ module Gnucash
         lcm_div = @div.lcm(other.div)
         Value.new((@val * (lcm_div / @div)) - (other.val * (lcm_div / other.div)), lcm_div)
       elsif other.is_a?(Numeric)
-        (to_f - other).round(2)
+        to_f - other
       else
         raise "Unexpected argument"
       end
@@ -89,7 +89,7 @@ module Gnucash
         other = other.to_f
       end
       if other.is_a?(Numeric)
-        (to_f * other).round(2)
+        to_f * other
       else
         raise "Unexpected argument (#{other.inspect})"
       end
@@ -105,7 +105,7 @@ module Gnucash
         other = other.to_f
       end
       if other.is_a?(Numeric)
-        (to_f / other).round(2)
+        to_f / other
       else
         raise "Unexpected argument (#{other.inspect})"
       end
