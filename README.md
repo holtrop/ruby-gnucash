@@ -39,6 +39,10 @@ act.transactions.each do |txn|
                        balance,
                        txn.description))
 end
+
+year = Date.today.year
+delta = act.balance_on("#{year}-12-31") - act.balance_on("#{year - 1}-12-31")
+puts "You've saved #{delta} this year so far!"
 ```
 
 ## Contributing
