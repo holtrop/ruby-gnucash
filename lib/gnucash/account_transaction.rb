@@ -1,6 +1,8 @@
 module Gnucash
   # Class to link a transaction object to an Account.
   class AccountTransaction
+    include Support::LightInspect
+
     # @return [Value] The transaction value for the linked account.
     attr_reader :value
 
@@ -20,6 +22,14 @@ module Gnucash
     # Pass through any missing method calls to the linked Transaction object.
     def method_missing(*args)
       @real_txn.send(*args)
+    end
+
+    # Attributes available for inspection
+    #
+    # @return [Array<Symbol>] Attributes used to build the inspection string
+    # @see Gnucash::Support::LightInspect
+    def attributes
+      %i[value]
     end
   end
 end

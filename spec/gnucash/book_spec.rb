@@ -34,6 +34,10 @@ module Gnucash
       it "lets you find an account by full name" do
         expect(@subject.find_account_by_full_name("Assets:Current Assets:Savings Account").id).to eq "67e6e7daadc35716eb6152769373e974"
       end
+
+      it "avoid inspection of heavier attributes" do
+        expect(@subject.inspect).to eq "#<Gnucash::Book start_date: 2007-01-01, end_date: 2012-12-28>"
+      end
     end
   end
 end

@@ -4,6 +4,8 @@ require "nokogiri"
 module Gnucash
   # Represent a GnuCash Book.
   class Book
+    include Support::LightInspect
+
     # @return [Array<Account>] Accounts in the book.
     attr_reader :accounts
 
@@ -57,6 +59,14 @@ module Gnucash
     # @return [Account, nil] Account object, or nil if not found.
     def find_account_by_full_name(full_name)
       @accounts.find { |a| a.full_name == full_name }
+    end
+
+    # Attributes available for inspection
+    #
+    # @return [Array<Symbol>] Attributes used to build the inspection string
+    # @see Gnucash::Support::LightInspect
+    def attributes
+      %i[start_date end_date]
     end
 
     private

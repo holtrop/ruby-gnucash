@@ -29,11 +29,10 @@ module Gnucash
     context "without errors" do
       before(:all) do
         @book = Gnucash.open("spec/books/sample.gnucash")
-        @txn = @book.find_account_by_full_name("Assets:Current Assets:Cash in Wallet").transactions.first
       end
 
-      it "keeps track of the transaction description" do
-        expect(@txn.description).to eq "Opening Balance"
+      it "avoid inspection of heavier attributes" do
+        expect(@book.transactions.first.inspect).to eq "#<Gnucash::Transaction id: 12efba30f14dc6cd4c3ffe2994de8284, date: 2007-01-01, description: Opening Balance, splits: [{:account=>#<Gnucash::Account id: 849f778995e8ecf8d4b96940afbbdcd7, name: Checking Account, description: Checking Account, type: BANK, placeholder: , parent_id: c8e868259d70f6491f9e70ffdf6634ee>, :value=>#<Gnucash::Value val: 30000, div: 100>}, {:account=>#<Gnucash::Account id: 23bea6468ee7b4acb4db4b3f54598a71, name: Opening Balances, description: Opening Balances, type: EQUITY, placeholder: , parent_id: ea7fe8b8abd560bef49826f68387ca78>, :value=>#<Gnucash::Value val: -30000, div: 100>}]>"
       end
     end
   end
