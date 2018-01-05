@@ -20,6 +20,9 @@ module Gnucash
     # @return [Boolean] Whether the account is a placeholder or not.
     attr_reader :placeholder
 
+    # @return [String, nil] The GUID of the parent account, if any.
+    attr_reader :parent_id
+
     # Create an Account object.
     #
     # @param book [Book] The {Gnucash::Book} containing the account.
@@ -46,6 +49,13 @@ module Gnucash
     # @return [String] Fully qualified account name.
     def full_name
       @full_name ||= calculate_full_name
+    end
+
+    # Lookup for the parent account in the book.
+    #
+    # @return [Account, nil] Account object, or nil if not found.
+    def parent
+      @parent ||= @parent_id ? @book.find_account_by_id(@parent_id) : nil
     end
 
     # Internal method used to associate a transaction with the account.

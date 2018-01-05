@@ -3,6 +3,7 @@ module Gnucash
     before(:all) do
       # just read the file once
       @book = Gnucash.open("spec/books/sample.gnucash")
+      @root = @book.find_account_by_full_name("Root Account")
       @assets = @book.find_account_by_full_name("Assets")
       @checking = @book.find_account_by_full_name("Assets:Current Assets:Checking Account")
       @income = @book.find_account_by_full_name("Income")
@@ -19,6 +20,18 @@ module Gnucash
 
     it "gives access to the fully-qualified account name" do
       expect(@checking.full_name).to eq "Assets:Current Assets:Checking Account"
+    end
+
+    it "gives access to parent account id" do
+      expect(@salary.parent_id).to eq @income.id
+      expect(@income.parent_id).to eq @root.id
+      expect(@root.parent_id).to eq nil
+    end
+
+    it "gives access to parent account" do
+      expect(@salary.parent).to eq @income
+      expect(@income.parent).to eq @root
+      expect(@root.parent).to eq nil
     end
 
     it "gives access to the final balance" do
