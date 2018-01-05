@@ -23,6 +23,16 @@ module Gnucash
       expect(Value.new("1000231455/100").to_s).to eq "10002314.55"
     end
 
+    it "converts the value to the expected float representation" do
+      expect(Value.new("5678/100").to_f).to be_within(0.00000001).of(56.78)
+      expect(Value.new("1000231455/100").to_f).to be_within(0.00000001).of(10002314.55)
+    end
+
+    it "converts the value to the expected rational representation" do
+      expect(Value.new("5678/55").to_r).to eq Rational(5678, 55)
+      expect(Value.new("1000231455/49").to_r).to eq Rational(1000231455, 49)
+    end
+
     it "allows adding two value objects" do
       a = Value.new("1234/100")
       b = Value.new("2345/100")
