@@ -3,6 +3,7 @@ module Gnucash
   # for accuracy in computations.
   class Value
     include Comparable
+    include Support::LightInspect
 
     # @return [Integer] The raw, undivided integer value.
     attr_reader :val
@@ -147,6 +148,14 @@ module Gnucash
     def ==(other)
       lcm_div = @div.lcm(other.div)
       (@val * (lcm_div / @div)) == (other.val * (lcm_div / other.div))
+    end
+
+    # Attributes available for inspection
+    #
+    # @return [Array<Symbol>] Attributes used to build the inspection string
+    # @see Gnucash::Support::LightInspect
+    def attributes
+      %i[val div]
     end
   end
 end

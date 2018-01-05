@@ -1,7 +1,7 @@
 module Gnucash
   describe Value do
-    describe '.zero' do
-      it 'creates a Value object with value 0' do
+    describe ".zero" do
+      it "creates a Value object with value 0" do
         expect(Value.zero.val).to eq 0
       end
     end
@@ -109,6 +109,10 @@ module Gnucash
       expect(Value.new("1234/10000") < Value.new("100/100")).to be_truthy
       expect(Value.new(7, 100) + Value.new(17, 1000)).to eq Value.new(87, 1000)
       expect(Value.new(80, 100) - Value.new(5, 50)).to eq Value.new(70, 100)
+    end
+
+    it "avoid inspection of heavier attributes" do
+      expect(Value.new("1234/10000").inspect).to eq "#<Gnucash::Value val: 1234, div: 10000>"
     end
 
     context "errors" do

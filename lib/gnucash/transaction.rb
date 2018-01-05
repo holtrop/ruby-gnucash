@@ -7,6 +7,8 @@ module Gnucash
   # Splits are created as AccountTransaction objects which are associated
   # with an individual account.
   class Transaction
+    include Support::LightInspect
+
     # @return [Date] The date of the transaction.
     attr_reader :date
 
@@ -45,6 +47,14 @@ module Gnucash
           value: value,
         }
       end
+    end
+
+    # Attributes available for inspection
+    #
+    # @return [Array<Symbol>] Attributes used to build the inspection string
+    # @see Gnucash::Support::LightInspect
+    def attributes
+      %i[id date description splits]
     end
   end
 end

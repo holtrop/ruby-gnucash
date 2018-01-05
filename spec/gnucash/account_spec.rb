@@ -62,5 +62,9 @@ module Gnucash
       expect(@income.placeholder).to be_truthy
       expect(@salary.placeholder).to be_falsey
     end
+
+    it "avoid inspection of heavier attributes" do
+      expect(@salary.inspect).to eq "#<Gnucash::Account id: efebb6cb617971b0a7f62e9d5a204789, name: Salary, description: Salary, type: INCOME, placeholder: , parent_id: 35ab61d46f5404895bf5d4949f8a5593>"
+    end
   end
 end

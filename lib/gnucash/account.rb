@@ -1,6 +1,8 @@
 module Gnucash
   # Represent a GnuCash account object.
   class Account
+    include Support::LightInspect
+
     # @return [String] The name of the account (unqualified).
     attr_reader :name
 
@@ -113,6 +115,14 @@ module Gnucash
         idx = (imin + imax) / 2
       end
       @balances[idx][:value]
+    end
+
+    # Attributes available for inspection
+    #
+    # @return [Array<Symbol>] Attributes used to build the inspection string
+    # @see Gnucash::Support::LightInspect
+    def attributes
+      %i[id name description type placeholder parent_id]
     end
 
     private
