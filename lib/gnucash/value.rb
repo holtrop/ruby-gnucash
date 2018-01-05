@@ -125,6 +125,13 @@ module Gnucash
       @val / @div.to_f
     end
 
+    # Convert the Value to a Rational.
+    #
+    # @return [Rational] Value of the value as a Rational.
+    def to_r
+      Rational(@val, @div)
+    end
+
     # Compare two Value objects.
     #
     # @return [Integer] Comparison result.
