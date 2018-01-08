@@ -43,7 +43,7 @@ module Gnucash
       @placeholder = node.xpath("act:slots/slot").find do |slot|
         (slot.xpath("slot:key").first.text == "placeholder" and
          slot.xpath("slot:value").first.text == "true")
-      end
+      end ? true : false
     end
 
     # Return the fully qualified account name.
