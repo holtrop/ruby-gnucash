@@ -128,6 +128,8 @@ module Gnucash
 
     # Convert the Value to a Rational.
     #
+    # @since 1.4.0
+    #
     # @return [Rational] Value of the value as a Rational.
     def to_r
       Rational(@val, @div)

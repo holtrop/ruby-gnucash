@@ -22,6 +22,8 @@ module Gnucash
     # @return [Boolean] Whether the account is a placeholder or not.
     attr_reader :placeholder
 
+    # @since 1.4.0
+    #
     # @return [String, nil] The GUID of the parent account, if any.
     attr_reader :parent_id
 
@@ -54,6 +56,8 @@ module Gnucash
     end
 
     # Lookup for the parent account in the book.
+    #
+    # @since 1.4.0
     #
     # @return [Account, nil] Account object, or nil if not found.
     def parent
