@@ -1,5 +1,19 @@
 # ChangeLog
 
+## v1.4.0
+
+- add Account#parent_id and #parent
+- add Value#to_r to convert to Rational
+- override #inspect for several Gnucash objects to improve REPL usage
+
+## v1.3.1
+
+- do not round numeric results of Value computations
+
+## v1.3.0
+
+- allow Value objects to be passed to / and * operators
+
 ## v1.2.2
 
 - Allow mixing Value objects with different divisors - fix #7
