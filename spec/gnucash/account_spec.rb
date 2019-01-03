@@ -54,6 +54,12 @@ module Gnucash
       it "includes transactions that occur on the given date" do
         expect(@checking.balance_on("2007-03-27")).to eq Value.new(780000)
       end
+
+      describe 'with child accounts' do
+        it "returns the balance with the balance of the child accounts" do
+          expect(@assets.balance_on("2007-03-27", true)).to eq Value.new(790000)
+        end
+      end
     end
 
     it "stores whether the account was a placeholder" do

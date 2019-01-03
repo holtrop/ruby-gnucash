@@ -100,12 +100,22 @@ module Gnucash
     # balance.
     #
     # @param date [String, Date] Date on which to query the balance.
+    # @param with_children [Boolean] If true, child accounts are accumulated as well. Default is false.
     #
     # @return [Value] Balance of the account as of the date given.
-    def balance_on(date)
+    def balance_on(date, with_children = false)
       date = Date.parse(date) if date.is_a?(String)
-      return Value.new(0) unless @balances.size > 0
-      return Value.new(0) if @balances.first[:date] > date
+      return_value = Value.new(0)
+
+      if with_children
+        # Get all child accounts from this account and accumulate the balances of them.
+        @book.accounts.reject { |account| account.parent != self }.each do |child_account|
+          return_value += child_account.balance_on(date, with_children)
+        end
+      end
+
+      return return_value unless @balances.size > 0
+      return return_value if @balances.first[:date] > date
       return @balances.last[:value] if date >= @balances.last[:date]
       imin = 0
       imax = @balances.size - 2
