@@ -1,5 +1,9 @@
 # ChangeLog
 
+## v1.5.0
+
+- add options Hash to Account#balance_on with :recursive option
+
 ## v1.4.0
 
 - add Account#parent_id and #parent
