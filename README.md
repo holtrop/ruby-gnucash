@@ -45,6 +45,10 @@ delta = act.balance_on("#{year}-12-31") - act.balance_on("#{year - 1}-12-31")
 puts "You've saved #{delta} this year so far!"
 ```
 
+To get the balance of an account, use ```act.balance_on("#{year}-12-31")```.
+To get the total balance of an account with all its children accounts,
+use ```act.balance_on("#{year}-12-31", recursive: true)```.
+
 ## Contributing
 
 1. Fork it
