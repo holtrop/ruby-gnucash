@@ -57,7 +57,7 @@ module Gnucash
 
       describe 'with child accounts' do
         it "returns the balance with the balance of the child accounts" do
-          expect(@assets.balance_on("2007-03-27", true)).to eq Value.new(790000)
+          expect(@assets.balance_on("2007-03-27", recursive: true)).to eq Value.new(790000)
         end
       end
     end

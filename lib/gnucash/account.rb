@@ -99,18 +99,23 @@ module Gnucash
     # Transactions that occur on the given date are included in the returned
     # balance.
     #
-    # @param date [String, Date] Date on which to query the balance.
-    # @param with_children [Boolean] If true, child accounts are accumulated as well. Default is false.
+    # @param date [String, Date]
+    #   Date on which to query the balance.
+    # @param options [Hash]
+    #   Optional parameters.
+    # @option options [Boolean] :recursive
+    #   Whether to include children account balances.
     #
-    # @return [Value] Balance of the account as of the date given.
-    def balance_on(date, with_children = false)
+    # @return [Value]
+    #   Balance of the account as of the date given.
+    def balance_on(date, options = {})
       date = Date.parse(date) if date.is_a?(String)
       return_value = Value.new(0)
 
-      if with_children
+      if options[:recursive]
         # Get all child accounts from this account and accumulate the balances of them.
         @book.accounts.reject { |account| account.parent != self }.each do |child_account|
-          return_value += child_account.balance_on(date, with_children)
+          return_value += child_account.balance_on(date, recursive: true)
         end
       end
 

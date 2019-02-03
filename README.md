@@ -46,8 +46,8 @@ puts "You've saved #{delta} this year so far!"
 ```
 
 To get the balance of an account, use ```act.balance_on("#{year}-12-31")```.
-To get the total balance of an account with all his childrem accounts,
-use ```act.balance_on("#{year}-12-31", true)```.
+To get the total balance of an account with all its children accounts,
+use ```act.balance_on("#{year}-12-31", recursive: true)```.
 
 ## Contributing
 
