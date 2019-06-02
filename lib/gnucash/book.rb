@@ -9,6 +9,9 @@ module Gnucash
     # @return [Array<Account>] Accounts in the book.
     attr_reader :accounts
 
+    # @return [Array<Account>] Customers in the book.
+    attr_reader :customers
+
     # @return [Array<Transaction>] Transactions in the book.
     attr_reader :transactions
 
