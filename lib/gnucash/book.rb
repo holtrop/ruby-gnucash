@@ -39,6 +39,7 @@ module Gnucash
         raise "Error: Expected to find one gnc:book entry"
       end
       @book_node = book_nodes.first
+      build_customers
       build_accounts
       build_transactions
       finalize
