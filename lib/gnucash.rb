@@ -1,5 +1,6 @@
 require_relative "gnucash/support"
 require_relative "gnucash/account"
+require_relative "gnucash/customer"
 require_relative "gnucash/account_transaction"
 require_relative "gnucash/book"
 require_relative "gnucash/transaction"
