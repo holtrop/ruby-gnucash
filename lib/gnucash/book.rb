@@ -78,6 +78,12 @@ module Gnucash
       end
     end
 
+    def build_customers
+      @customers = @book_node.xpath('gnc:gnccustomer').map do |customer_node|
+        Customer.new(self, customer_node)
+      end
+    end
+
     # @return [void]
     def build_transactions
       @start_date = nil
