@@ -83,7 +83,7 @@ module Gnucash
     end
 
     def build_customers
-      @customers = @book_node.xpath('gnc:gnccustomer').map do |customer_node|
+      @customers = @book_node.xpath('gnc:GncCustomer').map do |customer_node|
         Customer.new(self, customer_node)
       end
     end
