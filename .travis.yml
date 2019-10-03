@@ -1,0 +1,26 @@
+language: ruby
+
+bundler_args: --without debugger
+
+cache: bundler
+sudo: false
+
+before_install:
+  - gem --version
+
+script: bundle exec rspec
+
+rvm:
+  - 2.4.6
+  - 2.5.5
+  - 2.6.4
+  - ruby-head
+
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+
+notifications:
+  email:
+    recipients:
+      - niklaus.giger@member.fsf.org
