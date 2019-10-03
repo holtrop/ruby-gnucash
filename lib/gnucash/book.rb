@@ -65,6 +65,17 @@ module Gnucash
       @accounts.find { |a| a.full_name == full_name }
     end
 
+    # Return a handle to the Customer object that has the given fully-qualified
+    # name.
+    #
+    # @param full_name [String]
+    #   Fully-qualified customer name (ex: "Joe Doe").
+    #
+    # @return [Customer, nil] Customer object, or nil if not found.
+    def find_customer_by_full_name(full_name)
+      @customers.find { |a| a.full_name == full_name }
+    end
+
     # Attributes available for inspection
     #
     # @return [Array<Symbol>] Attributes used to build the inspection string

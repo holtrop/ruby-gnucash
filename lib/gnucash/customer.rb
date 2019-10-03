@@ -14,6 +14,12 @@ module Gnucash
     # @return [String] The ID of the customer.
     attr_reader :id
 
+    # @return [String] The address of the customer.
+    attr_reader :address
+
+    # @return [String] The shipping address of the customer.
+    attr_reader :shipping_address
+
     # Create an customer object.
     #
     # @param book [Book] The {Gnucash::Book} containing the customer.
@@ -24,6 +30,8 @@ module Gnucash
       @name = node.xpath('cust:name').text
       @id = node.xpath('cust:id').text
       @guid = node.xpath('cust:guid').text
+      @address = node.xpath('cust:addr').text
+      @shipping_address = node.xpath('cust:shipaddr').text
     end
 
     # Return the fully qualified customer name.
@@ -38,7 +46,7 @@ module Gnucash
     # @return [Array<Symbol>] Attributes used to build the inspection string
     # @see Gnucash::Support::LightInspect
     def attributes
-      %i[id name guid]
+      %i[id name guid address shipping_address]
     end
 
   end

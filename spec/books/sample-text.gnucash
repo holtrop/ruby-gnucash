@@ -33,9 +33,10 @@
 <gnc:book version="2.0.0">
 <book:id type="guid">b8178c8d763ec49988c2696d9e41d7f6</book:id>
 <gnc:count-data cd:type="commodity">1</gnc:count-data>
-<gnc:count-data cd:type="account">64</gnc:count-data>
-<gnc:count-data cd:type="transaction">473</gnc:count-data>
+<gnc:count-data cd:type="account">65</gnc:count-data>
+<gnc:count-data cd:type="transaction">474</gnc:count-data>
 <gnc:count-data cd:type="schedxaction">6</gnc:count-data>
+<gnc:count-data cd:type="gnc:GncCustomer">1</gnc:count-data>
 <gnc:commodity version="2.0.0">
   <cmdty:space>ISO4217</cmdty:space>
   <cmdty:id>USD</cmdty:id>
@@ -30238,6 +30239,56 @@
     </gnc:recurrence>
   </sx:schedule>
 </gnc:schedxaction>
+<gnc:GncCustomer version="2.0.0">
+  <cust:guid type="guid">0938eaff7545d7ba45fe7b866d60a209</cust:guid>
+  <cust:name>Joe Doe</cust:name>
+  <cust:id>8765</cust:id>
+  <cust:addr version="2.0.0">
+    <addr:name>Joe Doe jr</addr:name>
+    <addr:addr1>Main Street 7</addr:addr1>
+    <addr:addr2>3rd floor</addr:addr2>
+    <addr:addr3>adress 3rd line</addr:addr3>
+    <addr:addr4>adress 4th line</addr:addr4>
+    <addr:phone>+41 55 612 20 54</addr:phone>
+    <addr:fax>+41 55 612 20 55</addr:fax>
+    <addr:email>joe.doe@gmail.com</addr:email>
+  </cust:addr>
+  <cust:shipaddr version="2.0.0">
+    <addr:name>Joe Doe sr</addr:name>
+    <addr:addr1>Main Street 1</addr:addr1>
+    <addr:addr2>line 2</addr:addr2>
+    <addr:addr3>line 3</addr:addr3>
+    <addr:addr4>line 4</addr:addr4>
+    <addr:phone>+41 612 20 55</addr:phone>
+    <addr:fax>+41 612 20 56</addr:fax>
+    <addr:email>joe.doe@gmail-copy.com</addr:email>
+  </cust:shipaddr>
+  <cust:notes>Some remark about the customer</cust:notes>
+  <cust:taxincluded>USEGLOBAL</cust:taxincluded>
+  <cust:active>1</cust:active>
+  <cust:discount>0/1</cust:discount>
+  <cust:credit>0/1</cust:credit>
+  <cust:currency>
+    <cmdty:space>ISO4217</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </cust:currency>
+  <cust:use-tt>0</cust:use-tt>
+  <cust:slots>
+    <slot>
+      <slot:key>last-posted-to-acct</slot:key>
+      <slot:value type="guid">849f778995e8ecf8d4b96940afbbdcd7</slot:value>
+    </slot>
+    <slot>
+      <slot:key>payment</slot:key>
+      <slot:value type="frame">
+        <slot>
+          <slot:key>last_acct</slot:key>
+          <slot:value type="guid">f58e9b550445468e25f277abdeadee91</slot:value>
+        </slot>
+      </slot:value>
+    </slot>
+  </cust:slots>
+</gnc:GncCustomer>
 </gnc:book>
 </gnc-v2>
 
