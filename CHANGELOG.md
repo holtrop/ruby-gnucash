@@ -1,5 +1,9 @@
 # ChangeLog
 
+## v1.6.0
+
+- add Customer class and Book#find_customer_by_full_name (#12, #13)
+
 ## v1.5.0
 
 - add options Hash to Account#balance_on with :recursive option

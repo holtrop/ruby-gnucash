@@ -10,6 +10,7 @@ module Gnucash
     attr_reader :accounts
 
     # @return [Array<Account>] Customers in the book.
+    # @since 1.6.0
     attr_reader :customers
 
     # @return [Array<Transaction>] Transactions in the book.
@@ -67,6 +68,8 @@ module Gnucash
 
     # Return a handle to the Customer object that has the given fully-qualified
     # name.
+    #
+    # @since 1.6.0
     #
     # @param full_name [String]
     #   Fully-qualified customer name (ex: "Joe Doe").

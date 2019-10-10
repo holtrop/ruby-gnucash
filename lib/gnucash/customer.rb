@@ -1,5 +1,6 @@
 module Gnucash
   # Represent a GnuCash customer object.
+  # @since 1.6.0
   class Customer
     include Support::LightInspect
     # gnc:GncCustomer
