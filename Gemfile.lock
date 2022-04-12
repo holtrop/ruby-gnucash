@@ -10,7 +10,7 @@ GEM
     diff-lcs (1.5.0)
     docile (1.4.0)
     mini_portile2 (2.8.0)
-    nokogiri (1.13.3)
+    nokogiri (1.13.4)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     psych (4.0.3)
