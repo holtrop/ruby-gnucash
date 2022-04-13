@@ -49,6 +49,10 @@ To get the balance of an account, use ```act.balance_on("#{year}-12-31")```.
 To get the total balance of an account with all its children accounts,
 use ```act.balance_on("#{year}-12-31", recursive: true)```.
 
+## Full YARD Documentation
+
+See <https://rubydoc.info/github/holtrop/ruby-gnucash/master>.
+
 ## Contributing
 
 1. Fork it
