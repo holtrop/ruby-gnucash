@@ -10,10 +10,10 @@ GEM
     diff-lcs (1.5.0)
     docile (1.4.0)
     mini_portile2 (2.8.0)
-    nokogiri (1.13.6)
+    nokogiri (1.13.8)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    psych (4.0.4)
+    psych (4.0.5)
       stringio
     racc (1.6.0)
     rake (13.0.6)
@@ -40,7 +40,7 @@ GEM
     simplecov_json_formatter (0.1.4)
     stringio (3.0.2)
     webrick (1.7.0)
-    yard (0.9.27)
+    yard (0.9.28)
       webrick (~> 1.7.0)
 
 PLATFORMS
@@ -55,4 +55,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   2.2.31
+   2.4.0.dev
