@@ -9,13 +9,13 @@ GEM
   specs:
     diff-lcs (1.5.0)
     docile (1.4.0)
-    mini_portile2 (2.8.0)
-    nokogiri (1.13.10)
-      mini_portile2 (~> 2.8.0)
+    mini_portile2 (2.8.4)
+    nokogiri (1.15.3)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    psych (5.0.1)
+    psych (5.1.0)
       stringio
-    racc (1.6.1)
+    racc (1.7.1)
     rake (13.0.6)
     rdoc (6.5.0)
       psych (>= 4.0.0)
@@ -23,25 +23,23 @@ GEM
       rspec-core (~> 3.12.0)
       rspec-expectations (~> 3.12.0)
       rspec-mocks (~> 3.12.0)
-    rspec-core (3.12.0)
+    rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
-    rspec-expectations (3.12.0)
+    rspec-expectations (3.12.3)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-mocks (3.12.0)
+    rspec-mocks (3.12.6)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-support (3.12.0)
-    simplecov (0.21.2)
+    rspec-support (3.12.1)
+    simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    stringio (3.0.3)
-    webrick (1.7.0)
-    yard (0.9.28)
-      webrick (~> 1.7.0)
+    stringio (3.0.7)
+    yard (0.9.34)
 
 PLATFORMS
   ruby
@@ -55,4 +53,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   2.4.0.dev
+   2.4.17
