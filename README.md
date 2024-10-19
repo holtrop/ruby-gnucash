@@ -37,7 +37,7 @@ act.transactions.each do |txn|
                  txn.date,
                  txn.value,
                  balance,
-                 txn.description))
+                 txn.description)
 end
 
 year = Date.today.year
