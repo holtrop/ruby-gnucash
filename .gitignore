@@ -17,12 +17,3 @@ tmp
 test.rb
 spec/books/*.gnucash.*.*
 spec/books/*.LCK
-# Devenv
-.devenv*
-devenv.local.nix
-
-# direnv
-.direnv
-
-# pre-commit
-.pre-commit-config.yaml
