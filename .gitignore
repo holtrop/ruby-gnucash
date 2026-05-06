@@ -17,3 +17,4 @@ tmp
 test.rb
 spec/books/*.gnucash.*.*
 spec/books/*.LCK
+bin/

@@ -70,7 +70,36 @@ module Gnucash
     end
 
     it "avoid inspection of heavier attributes" do
-      expect(@salary.inspect).to eq "#<Gnucash::Account id: efebb6cb617971b0a7f62e9d5a204789, name: Salary, description: Salary, type: INCOME, placeholder: false, parent_id: 35ab61d46f5404895bf5d4949f8a5593>"
+      expect(@salary.inspect).to eq "#<Gnucash::Account id: efebb6cb617971b0a7f62e9d5a204789, name: Salary, description: Salary, type: INCOME, code: , placeholder: false, parent_id: 35ab61d46f5404895bf5d4949f8a5593, commodity_space: ISO4217, commodity_id: USD>"
+    end
+
+    context "with pricedb-fixture (account linked to a priced security)" do
+      before(:all) do
+        @pricedb_book = Gnucash.open("spec/books/pricedb-fixture.gnucash")
+        @stocks_account = @pricedb_book.find_account_by_full_name("Stocks")
+      end
+
+      it "returns the Security for the account commodity when it appears in the price database" do
+        sec = @stocks_account.security
+        expect(sec).not_to be_nil
+        expect(sec.space).to eq("TEST")
+        expect(sec.id).to eq("STK")
+        expect(sec.isin).to eq("US0378331005")
+      end
+
+      it "returns nil when the account commodity has no priced security" do
+        brokerage = @pricedb_book.find_account_by_full_name("Brokerage")
+        expect(brokerage.security).to be_nil
+      end
+
+      it "exposes the GnuCash account code (act:code)" do
+        expect(@pricedb_book.find_account_by_full_name("Brokerage").code).to eq("98234989234")
+        expect(@stocks_account.code).to eq("9823498n ewori oio982394")
+      end
+
+      it "returns nil for code when act:code is absent" do
+        expect(@pricedb_book.find_account_by_full_name("Root Account").code).to be_nil
+      end
     end
   end
 end

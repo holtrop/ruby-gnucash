@@ -15,12 +15,27 @@ module Gnucash
     # @return [String] The GUID of the account.
     attr_reader :id
 
+    # @return [String, nil] Account code (+act:code+), if set in GnuCash.
+    #
+    # @since 1.6.0
+    attr_reader :code
+
     # @return [Array<AccountTransaction>]
     #   List of transactions associated with this account.
     attr_reader :transactions
 
     # @return [Boolean] Whether the account is a placeholder or not.
     attr_reader :placeholder
+
+    # @return [String, nil] Commodity namespace (+cmdty:space+) from +act:commodity+, if present.
+    #
+    # @since 1.6.0
+    attr_reader :commodity_space
+
+    # @return [String, nil] Commodity id (+cmdty:id+) from +act:commodity+, if present.
+    #
+    # @since 1.6.0
+    attr_reader :commodity_id
 
     # @since 1.4.0
     #
@@ -38,6 +53,8 @@ module Gnucash
       @type = node.xpath('act:type').text
       @description = node.xpath('act:description').text
       @id = node.xpath('act:id').text
+      code_raw = node.at_xpath('act:code')&.text
+      @code = (code_raw.nil? || code_raw.empty?) ? nil : code_raw
       @parent_id = node.xpath('act:parent').text
       @parent_id = nil if @parent_id == ""
       @transactions = []
@@ -46,6 +63,29 @@ module Gnucash
         (slot.xpath("slot:key").first.text == "placeholder" and
          slot.xpath("slot:value").first.text == "true")
       end ? true : false
+
+      cmd = node.at_xpath("act:commodity")
+      if cmd
+        @commodity_space = cmd.at_xpath("cmdty:space")&.text&.strip
+        @commodity_id = cmd.at_xpath("cmdty:id")&.text&.strip
+        @commodity_space = nil if @commodity_space.nil? || @commodity_space.empty?
+        @commodity_id = nil if @commodity_id.nil? || @commodity_id.empty?
+      else
+        @commodity_space = nil
+        @commodity_id = nil
+      end
+    end
+
+    # Priced {Security} for this account's commodity, if the commodity appears in the
+    # book's price database (+gnc:pricedb+). Otherwise +nil+.
+    #
+    # @since 1.6.0
+    #
+    # @return [Security, nil]
+    def security
+      return nil unless @commodity_space && @commodity_id
+
+      @book.find_security(@commodity_space, @commodity_id)
     end
 
     # Return the fully qualified account name.
@@ -141,7 +181,7 @@ module Gnucash
     # @return [Array<Symbol>] Attributes used to build the inspection string
     # @see Gnucash::Support::LightInspect
     def attributes
-      %i[id name description type placeholder parent_id]
+      %i[id name description type code placeholder parent_id commodity_space commodity_id]
     end
 
     private
